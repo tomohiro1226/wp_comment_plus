@@ -164,5 +164,6 @@ class Wp_CommentsPlus
         require_once($this->path . 'includes/api/api.php');
         require_once($this->path . 'includes/admin/admin.php');
         require_once($this->path . 'includes/class-wp-comments-plus-comments.php');
+        require_once($this->path . 'includes/link-template.php');
     }
 } // end of class
