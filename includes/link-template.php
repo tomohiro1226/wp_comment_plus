@@ -68,7 +68,7 @@ function trash_comment_link($text = null, $before = '', $after = '')
         return;
     }
     
-    if (!$comment->user_id == get_current_user_id()) {
+    if (!(intval($comment->user_id) == get_current_user_id())) {
         return;
     }
 
