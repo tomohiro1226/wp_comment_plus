@@ -2,7 +2,7 @@
 /**
  * The Wp_CommentPlus Link Template Functions.
  *
- * Wp_Commentの拡張機能を提供します。
+ * Wp_CommentsPlusの拡張機能を提供します。
  *
  * @package Wp_CommentsPlus
  * @since 0.0.1
@@ -59,7 +59,7 @@ function get_trash_comment_link($comment_id = 0)
  * @param string $before Optional. Display before trash link. Default empty.
  * @param string $after  Optional. Display after trash link. Default empty.
  */
-function trash_comment_link($text = null, $before = '', $after = '')
+function trash_comment_link($message = null, $before = '', $after = '')
 {
     $comment = get_comment();
 
@@ -73,12 +73,17 @@ function trash_comment_link($text = null, $before = '', $after = '')
     }
 
     // リンクの作成
-    if (null === $text) {
-        $text = 'コメントの削除';
+    if (null == $message) {
+        $message = 'コメントの削除';
     }
 
-    $link = '<a class="comment-trash-link" href="' . esc_url(get_trash_comment_link($comment)) . '">' . $text . '</a>';
-
+    $link = '<div is="del-comment" data-wp-comments-plus-component ' .
+            'message="' . $message . '"' .
+            'icon="dashicons-warning" ' .
+            'title="コメントを削除します" ' .
+            'text="本当にコメントを削除しても大丈夫ですか。" ' .
+            'do_message="OK" ' .
+            'link="' . esc_url(get_trash_comment_link($comment)) .'"></div>';
     /**
      * Filters the comment trash link anchor tag.
      *
@@ -86,7 +91,6 @@ function trash_comment_link($text = null, $before = '', $after = '')
      *
      * @param string $link       Anchor tag for the trash link.
      * @param int    $comment_id Comment ID.
-     * @param string $text       Anchor text.
      */
-    echo $before . apply_filters('get_wp_comments_plus_trash_comment_link', $link, $comment->comment_ID, $text) . $after;
+    echo $before . apply_filters('get_wp_comments_plus_trash_comment_link', $link, $comment->comment_ID) . $after;
 }

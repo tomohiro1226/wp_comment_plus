@@ -43,4 +43,16 @@ function del_come_get($tag, $default = '', $type = 'post')
     }
 }
 
+/**
+ * [Utility function] Wp_Comments_PlusにあるIncludesのPATHを取得する
+ *
+ * @since 0.0.1
+ *
+ * @param  string $file     Includeファイルから指定するファイル
+ */
+function wp_comments_plus_includes_path($file = '')
+{
+    return plugins_url($file, __DIR__);
+}
+
 // End of file.

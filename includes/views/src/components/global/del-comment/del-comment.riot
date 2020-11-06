@@ -1,0 +1,74 @@
+<!-- 
+ コメントを削除する際に確認ダイアログを表示させる機能を提供する
+
+ * @package Wp_CommentsPlus
+ * @since 0.0.1
+ * @author Tomohiro
+ * @copyright 2020-2020
+ -->
+<del-comment>
+    <p id="wp-comments-plus-modal-open-btn" onclick={ toggleModalWindow }>{ props.message || "コメントの削除" }</p>
+    <div id="wp-comments-plus-modal" 　if={state.show} onclick={ toggleModalWindow }>
+        <modal-window { ...attributes }></modal-window>
+    </div>
+
+    <script>
+        import ModalWindow from '../../includes/modal-window/modal-window.riot'
+
+        export default {
+
+            components: {
+
+                ModalWindow
+            },
+            state: {
+
+                show: false
+            },
+            onBeforeMount(props, state) {
+
+                // modal-windowタグの属性を初期化
+                this.attributes = {
+                    icon: props.icon || "dashicons-smiley",
+                    title: props.title || "コメントを削除します",
+                    text: props.text || "本当にコメントを削除しても大丈夫ですか。",
+                    do_message: props.do_message || "OK",
+                    link: props.link
+                }
+            },
+            toggleModalWindow(e) {
+
+                this.update({
+                    show: !this.state.show
+                })
+            }
+        }
+    </script>
+
+    <style>
+        :host {
+            display: inline-block;
+        }
+
+        p#wp-comments-plus-modal-open-btn {
+            cursor: pointer;
+            cursor: hand;
+            display: inline-block;
+        }
+
+        p#wp-comments-plus-modal-open-btn:hover {
+            text-decoration: underline;
+        }
+
+        div#wp-comments-plus-modal {
+            position: fixed;
+            z-index: 99;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</del-comment>

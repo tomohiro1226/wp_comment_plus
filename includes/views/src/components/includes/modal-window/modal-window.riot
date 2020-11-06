@@ -1,0 +1,111 @@
+<!-- 
+ ウィンドウを提供する
+ # ただし、モーダル機能は呼び出し元で作成してください。
+
+ * @package Wp_CommentsPlus
+ * @since 0.0.1
+ * @author Tomohiro
+ * @copyright 2020-2020
+ *
+ * @see https://developer.wordpress.org/resource/dashicons
+ -->
+<modal-window>
+    <div id="wp-comments-plus-modal-content" onclick={ modalWindow }>
+        <input type="button" id="wp-comments-plus-modal-close-btn" class="dashicons" value="&#xf153;" onclick={ close }>
+        <span class="dashicons { props.icon }"></span>
+        <div id="wp-comments-plus-title">{ props.title }</div>
+        <div id="wp-comments-plus-text">{ props.text }</div>
+        <div id="wp-comments-plus-modal-link-btn">
+            <a href="{ props.link }" onclick={ close }>{ props.do_message }</a>
+        </div>
+    </div>
+
+    <script>
+        export default {
+
+            onMounted() {
+
+                this.ParentPropagation = false
+            },
+
+            modalWindow(e) {
+
+                if (this.ParentPropagation == false) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                }
+            },
+
+            close(e) {
+
+                // ボタンが押された際は、親要素へクリックイベントを伝播させる
+                this.ParentPropagation = true
+            }
+        }
+
+    </script>
+
+    <style>
+        :host {
+            background-color: white;
+            z-index: 999;
+            color: #afafaf;
+            width: 500px;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translateY(-55%) translateX(-50%);
+            -webkit- transform: translateY(-50%) translateX(-50%);
+        }
+
+        div#wp-comments-plus-title {
+            text-align: center;
+            margin: 10px 15% 10px 15%;
+            font-size: 1.6em;
+            color: #4e4e4e;
+            font-weight: bold;
+        }
+
+        div#wp-comments-plus-text {
+            text-align: center;
+            margin-top: 5px;
+            padding-bottom: 30px;
+            font-size: 0.8em;
+        }
+
+        span.dashicons {
+            font-size: 85px;
+            display: block;
+            margin: 0 auto;
+            width: 85px;
+            height: 125px;
+            padding-top: 40px;
+        }
+
+        input#wp-comments-plus-modal-close-btn {
+            color: #afafaf;
+            float: right;
+            background-color: transparent;
+            font-size: 21px;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            margin: 10px;
+            outline: none;
+        }
+
+        div#wp-comments-plus-modal-link-btn {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        div#wp-comments-plus-modal-link-btn a {
+            background-color: #3f8cd8;
+            text-decoration: none;
+            border-radius: 2px;
+            color: white;
+            padding: 6px 20px;
+            display: inline-block;
+        }
+    </style>
+</modal-window>

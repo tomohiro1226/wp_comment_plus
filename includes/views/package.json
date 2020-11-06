@@ -1,0 +1,38 @@
+{
+  "name": "wp-comments-plus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --require esm --require jsdom-global/register --require ./test/register-riot-extension.js mocha src/**/*.spec.js",
+    "cov": "nyc report --reporter=text-lcov | coveralls",
+    "cov-html": "nyc report --reporter=html",
+    "build": "webpack -c --mode production",
+    "watch": "webpack -c --mode production --watch",
+    "prepublishOnly": "npm test",
+    "start": "webpack-dev-server --inline --watch --hot --colors -d --port 3000"
+  },
+  "author": "",
+  "license": "GPL-2.0-only",
+  "devDependencies": {
+    "@riotjs/compiler": "^5.0.0",
+    "@riotjs/ssr": "^5.0.0",
+    "@riotjs/webpack-loader": "^4.0.3",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "jsdom": "^16.2.2",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@riotjs/hot-reload": "^4.0.1",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "riot": "^5.0.0"
+  }
+}

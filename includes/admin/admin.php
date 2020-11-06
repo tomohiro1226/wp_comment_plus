@@ -24,7 +24,7 @@ if (! defined('ABSPATH')) {
  */
 function wp_comments_plus_admin()
 {
-    global $wp_comment_plus;
+    global $wp_comments_plus;
 
     echo 'This is the page content';
 

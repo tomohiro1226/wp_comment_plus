@@ -27,13 +27,13 @@ add_action('init', 'wp_comment_plus_init', 10);
  *
  * @since 0.0.1
  *
- * @global object $wp_comment_plus Wp_CommentPlusのオブジェクト.
+ * @global object $wp_comments_plus Wp_CommentPlusのオブジェクト.
  */
 function wp_comment_plus_init()
 {
 
     // Set the object as global.
-    global $wp_comment_plus;
+    global $wp_comments_plus;
 
     /**
      * Load the Wp_CommentsPlus class.
@@ -41,5 +41,5 @@ function wp_comment_plus_init()
     require_once('includes/class-wp-comments-plus.php');
 
     // Invoke the Wp_CommentsPlus class.
-    $wp_comment_plus = new Wp_CommentsPlus();
+    $wp_comments_plus = new Wp_CommentsPlus();
 }

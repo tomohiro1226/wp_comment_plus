@@ -68,7 +68,7 @@ class Wp_CommentsPlus
 
         // Constants.
         $this->path = plugin_dir_path(__DIR__);
-        $this->name = $this->path . 'wp-members.php';
+        $this->name = $this->path . 'wp-comments-plus';
         $this->slug = substr(basename($this->name), 0, -4);
         
         // Load dependent files.
@@ -90,6 +90,7 @@ class Wp_CommentsPlus
         // Add actions.
         add_action('admin_menu', array( $this, 'admin_options'));
         add_action('template_redirect', array( $this, 'get_action'));
+        add_action('wp_enqueue_scripts', array( $this, 'load_external_dependencies'));
     }
     
     /**
@@ -161,9 +162,33 @@ class Wp_CommentsPlus
      */
     public function load_dependencies()
     {
-        require_once($this->path . 'includes/api/api.php');
-        require_once($this->path . 'includes/admin/admin.php');
+
+        // Wp_CommentPlus classes
         require_once($this->path . 'includes/class-wp-comments-plus-comments.php');
         require_once($this->path . 'includes/link-template.php');
+
+        // api
+        require_once($this->path . 'includes/api/api.php');
+
+        // admin
+        require_once($this->path . 'includes/admin/admin.php');
+    }
+
+    /**s
+     * Load dependent external files.
+     *
+     * @since 0.0.1
+     */
+    public function load_external_dependencies()
+    {
+        wp_enqueue_style('dashicons');
+
+        wp_enqueue_script(
+            'modal-window-bundle',
+            wp_comments_plus_includes_path('views/dist/wp-comments-plus.js'),
+            array(),
+            '0.0.1',
+            true
+        );
     }
 } // end of class
